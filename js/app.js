@@ -119,6 +119,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     };
+    
+    /* ==========================
+       CONTROL DEL LOADER (PRELOADER SEGURO)
+    ========================== */
+
+    const loader = document.getElementById('loader');
+
+    const ocultarLoader = () => {
+        if (loader && !loader.classList.contains('loader--hidden')) {
+            loader.classList.add('loader--hidden');
+        }
+    };
+
+    // 1. Quitar el loader cuando cargue la página normalmente
+    window.addEventListener('load', () => {
+        setTimeout(ocultarLoader, 500); // Pequeño delay de gracia
+    });
+
+    // 2. Respaldo de seguridad: si alguna imagen pesada tarda demasiado, 
+    // forzamos el cierre del loader a los 1.5 segundos para no bloquear al usuario.
+    setTimeout(ocultarLoader, 1500);
 
     window.addEventListener('scroll', highlightActiveLink);
 

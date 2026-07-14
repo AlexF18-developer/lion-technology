@@ -224,46 +224,66 @@ section{
    LOADER
 ======================================================= */
 
-.loader{
-
-    position:fixed;
-
-    inset:0;
-
-    background:#000;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    z-index:9999;
-
+.loader {
+    position: fixed;
+    inset: 0;
+    background: #0d0d0d; /* Usamos el color de fondo de tu paleta */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
-.loader__content{
-
-    text-align:center;
-
+    /* Si el tema claro está activo en el HTML, cambiamos el fondo del loader */
+    html.light-theme .loader {
+    background: #F8F9FA;
 }
 
-.loader__logo{
-
-    width:90px;
-
-    margin:auto;
-
+    .loader__content {
+    text-align: center;
 }
 
-.loader__title{
+    .loader__logo {
+    width: 90px;
+    margin: auto;
+    animation: loaderPulse 1.8s infinite ease-in-out;
+}
 
-    margin-top:20px;
+    .loader__title {
+    margin-top: 20px;
+    color: #fff;
+    letter-spacing: 2px;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
 
-    color:#fff;
+    html.light-theme .loader__title {
+    color: #1F2937; /* Color de texto oscuro para tema claro */
+}
 
-    letter-spacing:2px;
+    /* ESTADO OCULTO QUE ACTIVARÁ JAVASCRIPT (Anti-bloqueo) */
+    .loader--hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
 
+    /* Animación de pulso elegante con el color primario de tu marca (Naranja) */
+    @keyframes loaderPulse {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+        filter: drop-shadow(0 0 15px var(--primary-color));
+    }
+    100% {
+        transform: scale(0.9);
+        opacity: 0.6;
+    }
 }
 
 /* =======================================================
